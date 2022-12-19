@@ -66,5 +66,5 @@ elif name == "test":
                 st.write("{0} : {1}%".format(emotions[0][0], round(emotions[0][1], 2)))
                 st.write("{0} : {1}%".format(emotions[1][0], round(emotions[1][1], 2)))
             except:
-                print("얼굴을 찾아내지 못했습니다.")
+
                 continue
