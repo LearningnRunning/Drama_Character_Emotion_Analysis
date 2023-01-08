@@ -33,7 +33,7 @@ df2_cnt = pd.read_csv('./result/'+name2+'_all_df_cnt.csv')
 
 if name == "드라마별 비교":
     st.title("드라마별 비교")
-    selEpi = st.selectbox('Which episode would you like to search for?', [1,2,3,4])
+    selEpi = st.selectbox('원하시는 회차를 골라주세요?', [1,2,3,4])
     st.write("# " + "에피소드 {0}화".format(selEpi))
     cols = st.columns([0.3,0.8,0.3])
     
@@ -58,7 +58,7 @@ if name == "드라마별 비교":
         
 elif name == "드라마 내 에피소드별 비교":
     st.title("드라마 내 에피소드별 비교")
-    selEpi = st.selectbox('Which episode would you like to search for?', ['백년의 약속', '야왕'])
+    selEpi = st.selectbox('드라마를 골라주세요.', ['백년의 약속', '야왕'])
     if selEpi == '백년의 약속':
         tmp_df = df1_cnt
         name = '100years'
