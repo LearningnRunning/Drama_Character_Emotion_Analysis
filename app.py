@@ -39,7 +39,7 @@ if name == "드라마별 비교":
     
 
     with cols[0]:
-        st.write("### " + "백년의 사랑")
+        st.write("### " + "백년의 유산")
         df1_tmp = fix_df(df1_cnt,'epi{0}'.format(selEpi))
         st.write('시청률: {0} %'.format(df1_tmp['rating'][0]))
         fig1 = px.pie(df1_tmp, values='count', names='emotion', color='emotion',color_discrete_sequence=px.colors.sequential.RdBu)      #plotly pie차트
@@ -58,8 +58,8 @@ if name == "드라마별 비교":
         
 elif name == "드라마 내 에피소드별 비교":
     st.title("드라마 내 에피소드별 비교")
-    selEpi = st.selectbox('드라마를 골라주세요.', ['백년의 약속', '야왕'])
-    if selEpi == '백년의 약속':
+    selEpi = st.selectbox('드라마를 골라주세요.', ['백년의 유산', '야왕'])
+    if selEpi == '백년의 유산':
         tmp_df = df1_cnt
         name = '100years'
     else:
