@@ -42,7 +42,7 @@ if name == "드라마별 비교":
         st.write("### " + "백년의 유산")
         df1_tmp = fix_df(df1_cnt,'epi{0}'.format(selEpi))
         st.write('시청률: {0} %'.format(df1_tmp['rating'][0]))
-        fig1 = px.pie(df1_tmp, values='count', names='emotion', color='emotion',color_discrete_sequence=px.colors.sequential.RdBu)      #plotly pie차트
+        fig1 = px.pie(df1_tmp, values='count', names='emotion', color='emotion',color_discrete_sequence=px.colors.qualitative.Pastel)      #plotly pie차트
         fig1.update_traces(textinfo='label+percent',textfont_size=20, hole=.2)
         # fig1.update_layout(margin=dict(b=0),)
         st.plotly_chart(fig1)
@@ -50,7 +50,7 @@ if name == "드라마별 비교":
         st.write("### " + "야왕")
         df2_tmp = fix_df(df2_cnt,'epi{0}'.format(selEpi))
         st.write('시청률: {0} %'.format(df2_tmp['rating'][0]))
-        fig2 = px.pie(df2_tmp, values='count', names='emotion', color='emotion',color_discrete_sequence=px.colors.sequential.RdBu)      #plotly pie차트
+        fig2 = px.pie(df2_tmp, values='count', names='emotion', color='emotion',color_discrete_sequence=px.colors.qualitative.Plotly)      #plotly pie차트
         fig2.update_traces(textinfo='label+percent',textfont_size=20, hole=.2)
         # fig2.update_layout(margin=dict(b=50),)
         st.plotly_chart(fig2)
