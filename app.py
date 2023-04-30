@@ -11,9 +11,10 @@ import plotly.express as px
 
 
 def fix_df(df,epi):
-    df = df[df['episode'] == epi+'_100_face']
+    df = df[df['episode'] == epi]
     df = df[df['emotion'] != "None"].reset_index(drop = False)
     return df
+
 def makeChart(df):
         fig1 = px.pie(df, values='count', names='emotion', color='emotion',color_discrete_sequence=px.colors.sequential.RdBu)      #plotly pie차트
         fig1.update_traces(textinfo='label+percent',textfont_size=20, hole=.2)
@@ -31,25 +32,27 @@ file_list = sorted(os.listdir('./result'))
 df1_cnt = pd.read_csv('./result/'+name1+'_all_df_cnt.csv')
 df2_cnt = pd.read_csv('./result/'+name2+'_all_df_cnt.csv')
 
+epi_list = [int(i.split('i')[-1]) for i in set(df1_cnt['episode'].to_list())]
+
 if name == "드라마별 비교":
     st.title("드라마별 비교")
-    selEpi = st.selectbox('원하시는 회차를 골라주세요?', [1,2,3,4])
+    selEpi = st.selectbox('원하시는 회차를 골라주세요?', sorted(epi_list))
     st.write("# " + "에피소드 {0}화".format(selEpi))
     cols = st.columns([0.3,0.8,0.3])
     
 
     with cols[0]:
         st.write("### " + "백년의 유산")
-        df1_tmp = fix_df(df1_cnt,'epi{0}'.format(selEpi))
-        st.write('시청률: {0} %'.format(df1_tmp['rating'][0]))
+        df1_tmp = fix_df(df1_cnt,f'epi{selEpi}')
+        # st.write('시청률: {0} %'.format(df1_tmp['rating'][0]))
         fig1 = px.pie(df1_tmp, values='count', names='emotion', color='emotion',color_discrete_sequence=px.colors.qualitative.Pastel)      #plotly pie차트
         fig1.update_traces(textinfo='label+percent',textfont_size=20, hole=.2)
         # fig1.update_layout(margin=dict(b=0),)
         st.plotly_chart(fig1)
     with cols[2]:
         st.write("### " + "야왕")
-        df2_tmp = fix_df(df2_cnt,'epi{0}'.format(selEpi))
-        st.write('시청률: {0} %'.format(df2_tmp['rating'][0]))
+        df2_tmp = fix_df(df1_cnt,f'epi{selEpi}')
+        # st.write('시청률: {0} %'.format(df2_tmp['rating'][0]))
         fig2 = px.pie(df2_tmp, values='count', names='emotion', color='emotion',color_discrete_sequence=px.colors.qualitative.Plotly)      #plotly pie차트
         fig2.update_traces(textinfo='label+percent',textfont_size=20, hole=.2)
         # fig2.update_layout(margin=dict(b=50),)
@@ -66,21 +69,16 @@ elif name == "드라마 내 에피소드별 비교":
         tmp_df = df2_cnt
         name = 'yawang'
 
-    st.line_chart(data=tmp_df, x='episode', y='rating', width=0, height=0, use_container_width=True)
-    tab1, tab2, tab3, tab4 = st.tabs(["epi1", "epi2", "epi3","epi4"])
-    
-    with tab1:
-        df1_tmp = fix_df(tmp_df,"epi1")
-        makeChart(df1_tmp)
-    with tab2:
-        df1_tmp = fix_df(tmp_df,"epi2")
-        makeChart(df1_tmp)
-    with tab3:
-        df1_tmp = fix_df(tmp_df,"epi3")
-        makeChart(df1_tmp)
-    with tab4:
-        df1_tmp = fix_df(tmp_df,"epi4")
-        makeChart(df1_tmp)
+ 
+    epi_list = set(tmp_df['episode'].to_list())
+    # st.line_chart(data=tmp_df, x='episode', y='rating', width=0, height=0, use_container_width=True)
+    tab_list = st.tabs(epi_list)
+    print(epi_list)
+    for tab in tab_list:
+        with tab:
+            df1_tmp = fix_df(tmp_df,tab)
+            makeChart(df1_tmp)
+
     
     # uploaded_files = st.file_uploader(
     #     "정면으로 찍은 사진을 올려보세요.", type=["png", "jpg"], accept_multiple_files=True
