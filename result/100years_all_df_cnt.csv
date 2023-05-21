@@ -61,8 +61,8 @@ angry,5,epi8
 disgust,2,epi8
 surprise,2,epi8
 sad,41,epi6
-fear,20,epi6
-happy,19,epi6
+fear,21,epi6
+happy,18,epi6
 None,12,epi6
 surprise,5,epi6
 angry,3,epi6
@@ -86,6 +86,12 @@ happy,14,epi46
 angry,8,epi46
 disgust,5,epi46
 surprise,1,epi46
+sad,55,epi48
+None,24,epi48
+happy,10,epi48
+fear,9,epi48
+surprise,1,epi48
+disgust,1,epi48
 fear,31,epi23
 sad,28,epi23
 None,25,epi23
@@ -272,6 +278,13 @@ None,15,epi42
 angry,7,epi42
 surprise,2,epi42
 disgust,2,epi42
+sad,39,epi10
+happy,21,epi10
+fear,21,epi10
+None,14,epi10
+surprise,2,epi10
+angry,2,epi10
+disgust,1,epi10
 sad,33,epi17
 None,25,epi17
 happy,19,epi17
